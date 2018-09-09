@@ -1,9 +1,14 @@
+/**
+	Örnek komuta göz atmayı unutmayın orada
+	bir kaç şey yazıyor. komutlar/ornek.js
+*/
+
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
 /**
 	Aşağıya bilgilerinizi yazın.
-	Üst kısımda kodlar bulunuyor. Bu kısıma dokunmayın.
+	Üst kısımda kodlar bulunuyor dokunmayın.
 */
 
 const client.ayarlar = {
@@ -28,7 +33,7 @@ const client.ayarlar = {
 
 /**
 	Yukarıya bilgilerinizi yazın.
-	Alt kısımda kodlar bulunuyor. Bu kısıma dokunmayın.
+	Alt kısımda kodlar bulunuyor dokunmayın.
 */
 
 const fs = require('fs')
@@ -47,11 +52,11 @@ fs.readdir(`./${client.ayarlar.klasor}/`, (err, files) => {
 
 		jsfiles.forEach(f => {
 			let props = require(`./${client.ayarlar.klasor}/${f}`)
-			client.commands.set(props.help.name, props)
+			client.commands.set(props.help.komut, props)
 			props.conf.aliases.forEach(alias => {
-				client.aliases.set(alias, props.help.name)
+				client.aliases.set(alias, props.help.komut)
 			})
-			log(`Yüklenen komut: ${props.help.name}`)
+			log(`Yüklenen komut: ${props.help.komut}`)
 		})
 	}
 })
@@ -128,6 +133,80 @@ client.on("guildDelete", guild => {
 		},
 		status: durum
 	})
+})
+
+client.on("message", message => {
+	if (message.author.bot) return
+	if (!message.content.startsWith(client.ayarlar.prefix)) return
+	var command = message.content.split(' ')[0].slice(client.ayarlar.prefix.length)
+	var args = message.content.split(' ').slice(1)
+	var cmd = ''
+
+	if (client.commands.has(command)) {
+		var cmd = client.commands.get(command)
+	} else if (client.aliases.has(command)) {
+		var cmd = client.commands.get(client.aliases.get(command))
+	}
+
+	if (cmd) {
+		if (cmd.conf.permLevel === 1) {
+			if (!message.member.hasPermission("MANAGE_MESSAGES")) {
+				const embed = new Discord.RichEmbed()
+					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
+					.setColor(client.ayarlar.renk)
+					.setTimestamp()
+				message.channel.send({embed})
+				return
+			}
+		}
+		if (cmd.conf.permLevel === 2) {
+			if (!message.member.hasPermission("KICK_MEMBERS")) {
+				const embed = new Discord.RichEmbed()
+					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
+					.setColor(client.ayarlar.renk)
+					.setTimestamp()
+				message.channel.send({embed})
+				return
+			}
+		}
+		if (cmd.conf.permLevel === 3) {
+			if (!message.member.hasPermission("ADMINISTRATOR")) {
+				const embed = new Discord.RichEmbed()
+					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
+					.setColor(client.ayarlar.renk)
+					.setTimestamp()
+				message.channel.send({embed})
+				return
+			}
+		}
+		if (cmd.conf.permLevel === 4) {
+			if (!client.ayarlar.sahip.includes(message.author.id)) {
+				const embed = new Discord.RichEmbed()
+					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
+					.setColor(client.ayarlar.renk)
+					.setTimestamp()
+				message.channel.send({embed})
+				return
+			}
+		}
+		if (cmd.conf.enabled === false) {
+			const embed = new Discord.RichEmbed()
+				.setDescription(`Bu komut devredışı bırakılmış!`)
+				.setColor(client.ayarlar.renk)
+				.setTimestamp()
+			message.channel.send({embed})
+			return
+		}
+		if (cmd.conf.guildOnly === false) {
+			const embed = new Discord.RichEmbed()
+				.setDescription(`Bu komut sunucularda devredışı bırakılmış!`)
+				.setColor(client.ayarlar.renk)
+				.setTimestamp()
+			message.channel.send({embed})
+			return
+		}
+		cmd.run(client, message, args)
+	}
 })
 
 client.login(client.ayarlar.token)
