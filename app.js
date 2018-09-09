@@ -36,13 +36,15 @@ const chalk = require('chalk')
 
 fs.readdir(`./${client.ayarlar.klasor}/`, (err, files) => {
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+
 	if(jsfiles.length <= 0) {
-		log(`${chalk.redBright("Üzgünüm ama hiçbir komut bulunamadı!")}`)
+		console.log(`${chalk.redBright("Üzgünüm ama hiçbir komut bulunamadı!")}`)
 	} else {
 		if (err) {
 			console.error(`${chalk.redBright("Hata çıktı;")}\n${err}\n\n${chalk.greenBright("Hatayı düzeltmen için bir kaç tavsiye vereceğim. İlk öncelikle ayarları doğru girdiğinden ve boş bırakmadığından emin ol. Daha sonra kendin eklediğin komutlara iyice bak ve örnek komutla karşılaştır. Hatan varsa düzelt. Eğer kodda hata olduğunu düşünüyorsan bildirmekten çekinme!")}`)
 		}
-		log(`${chalk.yellow(jsfiles.length)} komut yüklenecek.`)
+		console.log(`${chalk.yellow(jsfiles.length)} komut yüklenecek.`)
+
 		jsfiles.forEach(f => {
 			let props = require(`./${client.ayarlar.klasor}/${f}`)
 			client.commands.set(props.help.name, props)
@@ -62,7 +64,7 @@ client.on("ready", () => {
 		var odurum = client.ayarlar.oyundurum.replace("oynuyor", "PLAYING").replace("dinliyor", "LISTENING").replace("izliyor", "WATCHING")
 	}
 
-	var durumlar = ["rahatsizetmeyin", "online", "bosta"]
+	var durumlar = ["rahatsizetmeyin", "cevrimici", "bosta"]
 	var durum = "dnd"
 
 	if(durumlar.includes(client.ayarlar.durum)) {
@@ -87,7 +89,7 @@ client.on("guildCreate", guild => {
 		var odurum = client.ayarlar.oyundurum.replace("oynuyor", "PLAYING").replace("dinliyor", "LISTENING").replace("izliyor", "WATCHING")
 	}
 
-	var durumlar = ["rahatsizetmeyin", "online", "bosta"]
+	var durumlar = ["rahatsizetmeyin", "cevrimici", "bosta"]
 	var durum = "dnd"
 
 	if(durumlar.includes(client.ayarlar.durum)) {
@@ -112,7 +114,7 @@ client.on("guildDelete", guild => {
 		var odurum = client.ayarlar.oyundurum.replace("oynuyor", "PLAYING").replace("dinliyor", "LISTENING").replace("izliyor", "WATCHING")
 	}
 
-	var durumlar = ["rahatsizetmeyin", "online", "bosta"]
+	var durumlar = ["rahatsizetmeyin", "cevrimici", "bosta"]
 	var durum = "dnd"
 
 	if(durumlar.includes(client.ayarlar.durum)) {
