@@ -20,7 +20,7 @@ exports.run = (client, message, args) => {
 			for (const command of help[kategori]) {
 				cmds += `\`${command.help.komut}\` `
 			}
-			var str += `**${kategori.capitalize()}** ${cmds}\n\n`
+			str += `**${kategori.capitalize()}** ${cmds}\n\n`
 		}
 
 		// Galiba bunuda anlamadınız. Burada istediğiniz kategoriyi tek tek yazdırıyoruz.
