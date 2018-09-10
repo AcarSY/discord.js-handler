@@ -11,7 +11,7 @@ const client = new Discord.Client()
 	Üst kısımda kodlar bulunuyor dokunmayın.
 */
 
-const client.ayarlar = {
+client.ayarlar = {
 
 	prefix: "!", // Komutların başına gelecek ek
 	token: "Discord Applications sayfasındaki token bilginiz",
