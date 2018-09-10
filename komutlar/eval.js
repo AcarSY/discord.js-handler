@@ -5,7 +5,7 @@ const tokenuyari = `SyntaxError: Unexpected token (token protect heçkırs and a
 exports.run = async (client, message, args) => {
 	if(!args[0]) {
 		const embed = new Discord.RichEmbed()
-			.setDescription(`${client.ayarlar.prefix}yardım ${message.content.split(" ")[0]}`)
+			.setDescription(`\`${client.ayarlar.prefix}yardım ${message.content.split(" ")[0].slice(2)}\` yazarak doğru kullanıma bakabilirsin!`)
 			.setColor(client.ayarlar.renk)
 			.setTimestamp()
 		message.channel.send({embed})
