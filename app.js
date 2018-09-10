@@ -183,15 +183,16 @@ client.on("message", async message => {
 			}
 		}
 		if (cmd.conf.permLevel === 4) {
-			const bot = await client.fetchApplication()
-			if (bot.owner.id !== message.author.id) {
-				const embed = new Discord.RichEmbed()
-					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
-					.setColor(client.ayarlar.renk)
-					.setTimestamp()
-				message.channel.send({embed})
-				return
-			}
+			client.fetchApplication().then(bot => {
+				if (bot.owner.id !== message.author.id) {
+					const embed = new Discord.RichEmbed()
+						.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
+						.setColor(client.ayarlar.renk)
+						.setTimestamp()
+					message.channel.send({embed})
+					return
+				}
+			})
 		}
 		if (cmd.conf.enabled === false) {
 			const embed = new Discord.RichEmbed()
