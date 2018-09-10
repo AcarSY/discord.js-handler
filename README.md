@@ -9,5 +9,6 @@ Aşağıda belirttiğim komutları sırasıyla kullanın.
 > * **npm i common-tags**
 > * **npm i moment**
 > * **npm i moment-duration-format**
+> * **npm i util**
 
 Daha sonra Başlat.bat dosyasına tıklayarak botu çalıştırın.
