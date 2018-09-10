@@ -210,7 +210,6 @@ client.on("message", message => {
 				return
 			}
 		}
-		cmd
 		cmd.run(client, message, args)
 	}
 })
