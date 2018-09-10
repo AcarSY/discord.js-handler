@@ -33,74 +33,30 @@ exports.run = (client, message, args) => {
 		message.channel.send({embed})
 		return
 	}
-	try {
-		let command = args[0]
-		if (client.commands.has(command)) {
-			command = client.commands.get(command)
-			const embed = new Discord.RichEmbed()
-				.addField('Komut', command.help.komut, false)
-				.addField('Açıklama', command.help.aciklama, false)
-				if (command.conf.permLevel === 0) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Yetki gerekmiyor. (0)`)
-				}
-				if (command.conf.permLevel === 1) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Mesajları Yönet yetkisi gerekiyor. (1)`)
-				}
-				if (command.conf.permLevel === 2) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Üyeleri At yetkisi gerekiyor. (2)`)
-				}
-				if (command.conf.permLevel === 3) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Yönetici yetkisi gerekiyor. (3)`)
-				}
-				if (command.conf.permLevel === 4) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Bot geliştiricisi olman gerekiyor. (4)`)
-				}
-				embed.addField('Doğru Kullanım', client.ayarlar.prefix + command.help.kullanim)
-				.addField('Alternatifler', command.conf.aliases.join(', '))
-				.setTimestamp()
-				.setColor(client.ayarlar.renk)
-			message.channel.send({embed})
-		} else {
-			const embed = new Discord.RichEmbed()
-				.setDescription(`${args[0]} diye bir komut bulunamadı. Lütfen geçerli bir komut girin. Eğer komutları bilmiyorsanız ${client.ayarlar.prefix}yardım yazabilirsiniz.`)
-				.setTimestamp()
-				.setColor(client.ayarlar.renk)
-			message.channel.send({embed})
-		}
-	} catch (err) {
-		let command = args[0]
-		if (client.commands.has(command)) {
-			command = client.commands.get(command)
-			const embed = new Discord.RichEmbed()
-				.addField('Komut', command.help.komut, false)
-				.addField('Açıklama', command.help.aciklama, false)
-				if (command.conf.permLevel === 0) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Yetki gerekmiyor. (0)`)
-				}
-				if (command.conf.permLevel === 1) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Mesajları Yönet yetkisi gerekiyor. (1)`)
-				}
-				if (command.conf.permLevel === 2) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Üyeleri At yetkisi gerekiyor. (2)`)
-				}
-				if (command.conf.permLevel === 3) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Yönetici yetkisi gerekiyor. (3)`)
-				}
-				if (command.conf.permLevel === 4) {
-					embed.addField('Kullanabilmek için Gerekli Yetki', `Bot geliştiricisi olman gerekiyor. (4)`)
-				}
-				embed.addField('Doğru Kullanım', client.ayarlar.prefix + command.help.kullanim)
-				.addField('Alternatifler', 'Bulunmuyor')
-				.setTimestamp()
-				.setColor(client.ayarlar.renk)
-			message.channel.send({embed})
-		} else {
-			const embed = new Discord.RichEmbed()
-				.setDescription(`${args[0]} diye bir komut bulunamadı. Lütfen geçerli bir komut girin. Eğer komutları bilmiyorsanız ${client.ayarlar.prefix}yardım yazabilirsiniz.`)
-				.setTimestamp()
-				.setColor(client.ayarlar.renk)
-			message.channel.send({embed})
-		}
+	let command = args[0]
+	if (client.commands.has(command)) {
+		command = client.commands.get(command)
+		var yetki = command.conf.permLevel
+			.replace(0, `Yetki gerekmiyor.`)
+			.replace(1, `Mesajları Yönet yetkisi gerekiyor.`)
+			.replace(2, `Üyeleri At yetkisi gerekiyor.`)
+			.replace(3, `Yönetici yetkisi gerekiyor.`)
+			.replace(4, `Bot sahibi yetkisi gerekiyor.`)
+		const embed = new Discord.RichEmbed()
+			.addField('Komut', command.help.komut, false)
+			.addField('Açıklama', command.help.aciklama, false)
+			.addField('Kullanabilmek için Gerekli Yetki', yetki)
+			.addField('Doğru Kullanım', client.ayarlar.prefix + command.help.kullanim)
+			.addField('Alternatifler', command.conf.aliases[0] ? command.conf.join(', ') : 'Bulunmuyor')
+			.setTimestamp()
+			.setColor(client.ayarlar.renk)
+		message.channel.send({embed})
+	} else {
+		const embed = new Discord.RichEmbed()
+			.setDescription(`${args[0]} diye bir komut bulunamadı. Lütfen geçerli bir komut girin. Eğer komutları bilmiyorsanız ${client.ayarlar.prefix}yardım yazabilirsiniz.`)
+			.setTimestamp()
+			.setColor(client.ayarlar.renk)
+		message.channel.send({embed})
 	}
 }
 
