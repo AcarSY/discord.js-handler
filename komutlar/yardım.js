@@ -1,10 +1,5 @@
 const Discord = require('discord.js')
 const { stripIndents } = require('common-tags')
-String.prototype.capitalize = function() {
-	this.charAt(0).toUpperCase() + this.slice(1);
-}
-
-// Galiba anlamadınız :) Üstteki kod kategorilerin ilk harfinin büyük olmasını sağlar.
 
 exports.run = (client, message, args) => {
 	if (!args[0]) {
@@ -12,18 +7,14 @@ exports.run = (client, message, args) => {
 		client.commands.forEach((command) => {
 			const cat = command.conf.kategori;
 			if (!help.hasOwnProperty(cat)) help[cat] = [];
-			help[cat].push(command);
+			help[cat].push(`\`${command.help.komut}\``);
 		})
 		var str = ''
-		var cmds = ''
 		for (const kategori in help) {
-			for (const command of help[kategori]) {
-				cmds += `\`${command.help.komut}\` `
-			}
-			str += `**${kategori.capitalize()}** ${cmds}\n\n`
+			str += `**${kategori.charAt(0).toUpperCase() + kategori.slice(1)}** ${help[kategori].join(" | ")}\n\n`
 		}
 
-		// Galiba bunuda anlamadınız. Burada istediğiniz kategoriyi tek tek yazdırıyoruz.
+		// Galiba anlamadınız. Burada istediğiniz kategoriyi tek tek yazdırıyoruz.
 
 		const embed = new Discord.RichEmbed()
 			.setAuthor(`${client.user.username} Komutları`)
@@ -69,7 +60,7 @@ exports.conf = {
 }
 
 exports.help = {
-	name: 'yardım',
-	description: 'Tüm komutları gösterir.',
-	usage: 'yardım [komut]'
+	komut: 'yardım',
+	aciklama: 'Tüm komutları gösterir.',
+	kullanim: 'yardım [komut]'
 }
