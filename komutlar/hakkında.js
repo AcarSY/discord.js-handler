@@ -3,7 +3,7 @@ const moment = require('moment');
 require('moment-duration-format');
 
 exports.run = async (client, message, args) => {
-	const owner = await client.fetchApplication()
+	const bot = await client.fetchApplication()
 	const aylar = {
 		"01": "Ocak",
 		"02": "Şubat",
@@ -22,6 +22,7 @@ exports.run = async (client, message, args) => {
 	var helpers = 'Bulunmuyor'
 
 	if(client.ayarlar.yardimcilar[0]) {
+		var helpers = ''
 		for (var i = 0; i < client.ayarlar.yardimcilar.length; i++) {
 			var şuanki = client.users.get(client.ayarlar.yardimcilar[i]).tag;
 			if (i === 0) {
@@ -42,14 +43,15 @@ exports.run = async (client, message, args) => {
 
 	const embed = new Discord.RichEmbed()
 		.setAuthor(`${client.user.username} | Bilgi ve İstatistikler`)
-		.addField('Bot Sahibi', owner.user.tag, false)
+		.addField('Bot Sahibi', bot.owner.tag, false)
 		.addField('Bot Geliştiricileri', helpers, false)
 		.addField('Komut Sayısı', client.commands.size, true)
 		.addField('Ön-Ek/Prefix', client.ayarlar.prefix, true)
+		.addBlankField()
 		.addField('Sürümler', `**Bot:** v${client.ayarlar.surum}\n**Discord.JS:** v${Discord.version}\n**Node.JS**: ${process.version}`, true)
-		.addField('Veriler', `**Müzik Çalan Sunucu Sayısı:** ${client.voiceConnections.size.toLocaleFormat()}\n**Kullanıcı Sayısı:** ${client.users.size.toLocaleFormat()}\n**Sunucu Sayısı:** ${client.guilds.size.toLocaleFormat()}\n**Kanal Sayısı:** ${client.channels.size.toLocaleFormat()}`, true)
+		.addField('Veriler', `**Müzik Çalan Sunucu Sayısı:** ${client.voiceConnections.size.toLocaleString()}\n**Kullanıcı Sayısı:** ${client.users.size.toLocaleString()}\n**Sunucu Sayısı:** ${client.guilds.size.toLocaleString()}\n**Kanal Sayısı:** ${client.channels.size.toLocaleString()}`, true)
 		.addField('Çalışma Süresi', `${duration}...`, false)
-		.addField('Açılış Tarihi', `${moment(client.user.createdAt).format('DD')} ${kur[moment(client.user.createdAt).format('MM')]} ${moment(client.user.createdAt).format('YYYY h:mm:ss')}`, false)
+		.addField('Açılış Tarihi', `${moment(client.user.createdAt).format('DD')} ${aylar[moment(client.user.createdAt).format('MM')]} ${moment(client.user.createdAt).format('YYYY HH:mm:ss')}`, false)
 		.addField("Botun Özel Linkleri", `[Sunucuna Ekle!](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=bot) | ${destek} | ${site}`)
 		.setTimestamp()
 		.setColor(client.ayarlar.renk)
