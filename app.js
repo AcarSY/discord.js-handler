@@ -183,7 +183,7 @@ client.on("message", message => {
 			}
 		}
 		if (cmd.conf.permLevel === 4) {
-			if (!client.ayarlar.sahip.includes(message.author.id)) {
+			if (client.ayarlar.sahip !== message.author.id) {
 				const embed = new Discord.RichEmbed()
 					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
 					.setColor(client.ayarlar.renk)
