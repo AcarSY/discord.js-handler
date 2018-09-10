@@ -138,7 +138,7 @@ client.on("guildDelete", guild => {
 	})
 })
 
-client.on("message", message => {
+client.on("message", async message => {
 	if (message.author.bot) return
 	if (!message.content.startsWith(client.ayarlar.prefix)) return
 	var command = message.content.split(' ')[0].slice(client.ayarlar.prefix.length)
@@ -183,7 +183,8 @@ client.on("message", message => {
 			}
 		}
 		if (cmd.conf.permLevel === 4) {
-			if (client.ayarlar.sahip !== message.author.id) {
+			const bot = await client.fetchApplication()
+			if (bot.owner.id !== message.author.id) {
 				const embed = new Discord.RichEmbed()
 					.setDescription(`Bu komutu kullanmak için yeterli yetkin bulunmuyor! ${client.ayarlar.prefix}yardım ${cmd.help.komut} yazarak gerekli yetkiyi görüntüleyebilirsin!`)
 					.setColor(client.ayarlar.renk)
