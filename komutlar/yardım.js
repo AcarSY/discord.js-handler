@@ -27,12 +27,12 @@ exports.run = (client, message, args) => {
 	let command = args[0]
 	if (client.commands.has(command)) {
 		command = client.commands.get(command)
-		var yetki = command.conf.permLevel
-			.replace(0, `Yetki gerekmiyor.`)
-			.replace(1, `Mesajları Yönet yetkisi gerekiyor.`)
-			.replace(2, `Üyeleri At yetkisi gerekiyor.`)
-			.replace(3, `Yönetici yetkisi gerekiyor.`)
-			.replace(4, `Bot sahibi yetkisi gerekiyor.`)
+		var yetki = command.conf.permLevel.toString()
+			.replace("0", `Yetki gerekmiyor.`)
+			.replace("1", `Mesajları Yönet yetkisi gerekiyor.`)
+			.replace("2", `Üyeleri At yetkisi gerekiyor.`)
+			.replace("3", `Yönetici yetkisi gerekiyor.`)
+			.replace("4", `Bot sahibi yetkisi gerekiyor.`)
 		const embed = new Discord.RichEmbed()
 			.addField('Komut', command.help.komut, false)
 			.addField('Açıklama', command.help.aciklama, false)
