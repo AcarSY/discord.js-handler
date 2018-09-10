@@ -13,7 +13,6 @@ const client = new Discord.Client()
 
 const client.ayarlar = {
 
-	ownerID: "478861391894282240", // ID Numaranız
 	prefix: "!", // Komutların başına gelecek ek
 	token: "Discord Applications sayfasındaki token bilginiz",
 	klasor: "komutlar", // Komutların bulunduğu klasörün ismi
