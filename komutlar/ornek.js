@@ -26,7 +26,7 @@ exports.conf = { // Özel ayarları belirtiyoruz.
 }
 
 exports.help = { // Ana ayarları belirtiyoruz.
-	komut: 'ping', // Komutu belirtiyoruz.
-	aciklama: 'Bptun gecikme süresini gösterir.', // Yardımda gözüken açıklamayı belirtiyoruz.
-	kullanim: 'ping' // Yardımda gözükecek kullanımı belirtiyoruz.
+	komut: 'ornek', // Komutu belirtiyoruz.
+	aciklama: 'Bu bir örnek komuttur.', // Yardımda gözüken açıklamayı belirtiyoruz.
+	kullanim: 'ornek' // Yardımda gözükecek kullanımı belirtiyoruz.
 }
