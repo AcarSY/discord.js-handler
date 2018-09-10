@@ -200,9 +200,9 @@ client.on("message", message => {
 			message.channel.send({embed})
 			return
 		}
-		if (cmd.conf.guildOnly === false) {
+		if (cmd.conf.guildOnly === true) {
 			const embed = new Discord.RichEmbed()
-				.setDescription(`Bu komut sunucularda devredışı bırakılmış!`)
+				.setDescription(`Bu komut özel mesajlarda devredışı bırakılmış!`)
 				.setColor(client.ayarlar.renk)
 				.setTimestamp()
 			message.channel.send({embed})
