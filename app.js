@@ -40,9 +40,11 @@ client.aliases = new Discord.Collection()
 
 const fs = require('fs')
 const chalk = require('chalk')
+var komutlar = ''
 
 fs.readdir(`./${client.ayarlar.klasor}/`, (err, files) => {
 	let jsfiles = files.filter(f => f.split(".").pop() === "js")
+	var komutlar = jsfiles.length
 
 	if(jsfiles.length <= 0) {
 		console.log(`${chalk.redBright("Üzgünüm ama hiçbir komut bulunamadı!")}`)
@@ -85,6 +87,7 @@ client.on("ready", () => {
 		},
 		status: durum
 	})
+	console.log(`Başarıyla ${chalk.yellow(komutlar)} komut yüklendi. Bot giriş yaptı!`)
 })
 
 client.on("guildCreate", guild => {
