@@ -22,9 +22,9 @@ client.ayarlar = {
 	site: "site.xyz", // Botun sitesi istenirse boş bırakılabilir.
 	yardimcilar: ["1. yardımcı ID numarası", "2. yardımcı ID numarası", "3. yardımcı ID numarası"], // İstenirse daha fazla eklenebilir. Eğer yoksa [] içi temizlenebilir.
 	sunucuekleme: "{sunucu} adlı sunucuya eklendim! Bu sunucuda toplam {uye} üye, {bot} bulunuyor! Şuan da toplam {sunucular} tane sunucuya hizmet veriyorum!", // Bot bir sunucuya katılınca konsolda yazacak yazı
-	sunucuatma: "{sunucu} adlı sunucudan atıldım! Bu sunucuda toplam {uye} üye, {bot} bulunuyordu! Şuan da toplam {sunucular} tane sunucuya hizmet veriyorum!" // Bot bir sunucudan atılınca konsolda yazacak yazı
-	oyun: "{prefix}yardım | {sunucu} sunucu | {site} | {kullanıcı} kullanıcı" // Oynuyor yeri
-	oyundurum: "oynuyor" // Oynuyor durumu sadece oynuyor veya dinliyor veya izliyor yazabilirsiniz eğer bunlar dışında bir şey yazarsanız veya boş bırakırsanız direk oynuyor gözükecektir.
+	sunucuatma: "{sunucu} adlı sunucudan atıldım! Bu sunucuda toplam {uye} üye, {bot} bulunuyordu! Şuan da toplam {sunucular} tane sunucuya hizmet veriyorum!", // Bot bir sunucudan atılınca konsolda yazacak yazı
+	oyun: "{prefix}yardım | {sunucu} sunucu | {site} | {kullanıcı} kullanıcı", // Oynuyor yeri
+	oyundurum: "oynuyor", // Oynuyor durumu sadece oynuyor veya dinliyor veya izliyor yazabilirsiniz eğer bunlar dışında bir şey yazarsanız veya boş bırakırsanız direk oynuyor gözükecektir.
 	durum: "cevrimici" // Botun durumu sadece rahatsizetmeyin veya cevrimici veya bosta yazabilirsiniz eğer bunlar dışında bir şey yazarsanız veya boş bırakırsanız direk çevrimiçi gözükecektir.
 
 }
