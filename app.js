@@ -35,6 +35,9 @@ client.ayarlar = {
 	Alt kısımda kodlar bulunuyor dokunmayın.
 */
 
+client.commands = new Discord.Collection()
+client.aliases = new Discord.Collection()
+
 const fs = require('fs')
 const chalk = require('chalk')
 
@@ -55,7 +58,7 @@ fs.readdir(`./${client.ayarlar.klasor}/`, (err, files) => {
 			props.conf.aliases.forEach(alias => {
 				client.aliases.set(alias, props.help.komut)
 			})
-			log(`Yüklenen komut: ${props.help.komut}`)
+			console.log(`Yüklenen komut: ${props.help.komut}`)
 		})
 	}
 })
@@ -77,7 +80,7 @@ client.on("ready", () => {
 
 	client.user.setPresence({
 		game: {
-			name: client.ayarlar.oyun.replace(\{prefix}\g, client.ayarlar.prefix).replace(\{kullanıcı}\g, client.users.size).replace(\{sunucu}\g, client.guilds.size).replace(\{site}\g, client.ayarlar.site),
+			name: client.ayarlar.oyun.replace(/{prefix}/g, client.ayarlar.prefix).replace(/{kullanıcı}/g, client.users.size).replace(/{sunucu}/g, client.guilds.size).replace(/{site}/g, client.ayarlar.site),
 			type: odurum
 		},
 		status: durum
@@ -85,7 +88,7 @@ client.on("ready", () => {
 })
 
 client.on("guildCreate", guild => {
-	console.log(client.ayarlar.sunucuekleme.replace(\{sunucu}\g, chalk.orange(guild.name)).replace(\{bot}\g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(\{uye}\g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(\{sunucular}\g, chalk.redBright(client.guilds.size)))
+	console.log(client.ayarlar.sunucuekleme.replace(/{sunucu}/g, chalk.orange(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
 	var odurumlar = ["oynuyor", "dinliyor", "izliyor"]
 	var odurum = "PLAYING"
 
@@ -102,7 +105,7 @@ client.on("guildCreate", guild => {
 
 	client.user.setPresence({
 		game: {
-			name: client.ayarlar.oyun.replace(\{prefix}\g, client.ayarlar.prefix).replace(\{kullanıcı}\g, client.users.size).replace(\{sunucu}\g, client.guilds.size).replace(\{site}\g, client.ayarlar.site),
+			name: client.ayarlar.oyun.replace(/{prefix}/g, client.ayarlar.prefix).replace(/{kullanıcı}/g, client.users.size).replace(/{sunucu}/g, client.guilds.size).replace(/{site}/g, client.ayarlar.site),
 			type: odurum
 		},
 		status: durum
@@ -110,7 +113,7 @@ client.on("guildCreate", guild => {
 })
 
 client.on("guildDelete", guild => {
-	console.log(client.ayarlar.sunucuatma.replace(\{sunucu}\g, chalk.orange(guild.name)).replace(\{bot}\g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(\{uye}\g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(\{sunucular}\g, chalk.redBright(client.guilds.size)))
+	console.log(client.ayarlar.sunucuatma.replace(/{sunucu}/g, chalk.orange(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
 	var odurumlar = ["oynuyor", "dinliyor", "izliyor"]
 	var odurum = "PLAYING"
 
@@ -127,7 +130,7 @@ client.on("guildDelete", guild => {
 
 	client.user.setPresence({
 		game: {
-			name: client.ayarlar.oyun.replace(\{prefix}\g, client.ayarlar.prefix).replace(\{kullanıcı}\g, client.users.size).replace(\{sunucu}\g, client.guilds.size).replace(\{site}\g, client.ayarlar.site),
+			name: client.ayarlar.oyun.replace(/{prefix}/g, client.ayarlar.prefix).replace(/{kullanıcı}/g, client.users.size).replace(/{sunucu}/g, client.guilds.size).replace(/{site}/g, client.ayarlar.site),
 			type: odurum
 		},
 		status: durum
