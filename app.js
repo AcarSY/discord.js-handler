@@ -200,14 +200,17 @@ client.on("message", message => {
 			message.channel.send({embed})
 			return
 		}
-		if (cmd.conf.guildOnly === true) {
-			const embed = new Discord.RichEmbed()
-				.setDescription(`Bu komut özel mesajlarda devredışı bırakılmış!`)
-				.setColor(client.ayarlar.renk)
-				.setTimestamp()
-			message.channel.send({embed})
-			return
+		if(message.channel.type === "dm") {
+			if (cmd.conf.guildOnly === true) {
+				const embed = new Discord.RichEmbed()
+					.setDescription(`Bu komut özel mesajlarda devredışı bırakılmış!`)
+					.setColor(client.ayarlar.renk)
+					.setTimestamp()
+				message.channel.send({embed})
+				return
+			}
 		}
+		cmd
 		cmd.run(client, message, args)
 	}
 })
