@@ -5,15 +5,15 @@ exports.run = async (client, message, args) => {
 	var ping = Math.round(message.createdTimestamp - msg.createdTimestamp)
 
 	if(ping < 0) {
-		var ping = Math.round(message.createdTimestamp - msg.createdTimestamp)
+		var ping = Math.round(msg.createdTimestamp - message.createdTimestamp)
 	}
 
-	message.channel.send(`Mesaj gecikme süresi: ${ping} milisaniye\nBot gecikme süresi: ${client.ping} milisaniye`)
+	message.channel.edit(`Mesaj gecikme süresi: ${ping} milisaniye\nBot gecikme süresi: ${client.ping} milisaniye`)
 }
 
 exports.conf = {
 	enabled: true,
-	guildOnly: true,
+	guildOnly: false,
 	aliases: [],
 	permLevel: 0,
 	kategori: 'kullanıcı'
