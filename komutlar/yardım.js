@@ -36,7 +36,7 @@ exports.run = (client, message, args) => {
 			.addField('Açıklama', command.help.aciklama, false)
 			.addField('Kullanabilmek için Gerekli Yetki', yetki)
 			.addField('Doğru Kullanım', client.ayarlar.prefix + command.help.kullanim)
-			.addField('Alternatifler', command.conf.aliases[0] ? command.conf.ailases.join(', ') : 'Bulunmuyor')
+			.addField('Alternatifler', command.conf.aliases[0] ? command.conf.aliases.join(', ') : 'Bulunmuyor')
 			.setTimestamp()
 			.setColor(client.ayarlar.renk)
 		message.channel.send({embed})
