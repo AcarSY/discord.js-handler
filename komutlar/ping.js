@@ -8,7 +8,7 @@ exports.run = async (client, message, args) => {
 		var ping = Math.round(msg.createdTimestamp - message.createdTimestamp)
 	}
 
-	message.channel.edit(`Mesaj gecikme süresi: ${ping} milisaniye\nBot gecikme süresi: ${client.ping} milisaniye`)
+	message.edit(`Mesaj gecikme süresi: ${ping} milisaniye\nBot gecikme süresi: ${client.ping} milisaniye`)
 }
 
 exports.conf = {
