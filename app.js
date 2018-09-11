@@ -89,7 +89,7 @@ client.on("ready", () => {
 })
 
 client.on("guildCreate", guild => {
-	console.log(client.ayarlar.sunucuekleme.replace(/{sunucu}/g, chalk.yellow(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
+	console.log(client.ayarlar.sunucuekleme.replace(/{sunucu}/g, chalk.yellow(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot).size)).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot).size)).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
 	var odurumlar = ["oynuyor", "dinliyor", "izliyor"]
 	var odurum = "PLAYING"
 
@@ -114,7 +114,7 @@ client.on("guildCreate", guild => {
 })
 
 client.on("guildDelete", guild => {
-	console.log(client.ayarlar.sunucuatma.replace(/{sunucu}/g, chalk.yellow(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot)).size).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot)).size).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
+	console.log(client.ayarlar.sunucuatma.replace(/{sunucu}/g, chalk.yellow(guild.name)).replace(/{bot}/g, chalk.blue(guild.members.filter(m => m.user.bot).size)).replace(/{uye}/g, chalk.green(guild.members.filter(m => !m.user.bot).size)).replace(/{sunucular}/g, chalk.redBright(client.guilds.size)))
 	var odurumlar = ["oynuyor", "dinliyor", "izliyor"]
 	var odurum = "PLAYING"
 
