@@ -15,7 +15,7 @@ exports.run = async (client, message, args) => {
 	if(code.match(/(client.token)/g)) {
 		const newEmbed = new Discord.RichEmbed()
 			.addField('Hata çıktı;', `\`\`\`xl\n${tokenuyari}\`\`\``)
-			evalEmbed.setColor('#FF0000');
+			.setColor('#FF0000');
 		message.channel.send(newEmbed);
 		return
 	}
